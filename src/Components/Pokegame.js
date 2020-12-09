@@ -10,32 +10,22 @@ class Pokegame extends Component {
         let handTwo = [];
         let totalExpTwo = 0;
 
-        let startNum = Math.floor(Math.random() * pokemon.length);
-
-        // iterating from startNum to length to add 4 pokemon from random index
-        for (let i = startNum; i < (startNum + 4); i++) {
-            if (i < pokemon.length) {
-                handOne.push(pokemon[i]);
-                totalExpOne += pokemon[i].base_experience;
-            } else { // case where it goes past total and need to wrap around
-                let wrappedNum = i % pokemon.length;
-                handOne.push(pokemon[wrappedNum]);
-                totalExpOne += pokemon[wrappedNum].base_experience;
+        // adding to first hand until 4 random have been added
+        while(handOne.length !== 4) {
+            let randomIndex = Math.floor(Math.random() * pokemon.length);       
+            if (!handOne.includes(pokemon[randomIndex])) {
+                handOne.push(pokemon[randomIndex]);
+                totalExpOne += pokemon[randomIndex].base_experience;
             }
         }
 
-        // adding remaining pokemon
+        // adding remaining pokemon to second hand
         for (let i = 0; i < pokemon.length; i++) {
             if (!handOne.includes(pokemon[i])) {
                 handTwo.push(pokemon[i]);
                 totalExpTwo += pokemon[i].base_experience;
             }
         }
-        console.log(handOne);
-        console.log(totalExpOne);
-        console.log(totalExpTwo);
-        console.log(handTwo);
-      
         return [{handOne, totalExpOne}, {handTwo, totalExpTwo}];
     }
 
@@ -61,10 +51,9 @@ class Pokegame extends Component {
 
         return (
             <div className="Pokegame">
-                <center><h1>Ivan's Pokedex</h1></center>
+                <h1 className="title">Ivan's Pokedex</h1>
                 <Pokedex pokemon={handOne} exp={handOne.totalExpOne}/>  
-                <p className="winningStatement">
-                    <strong>{winner}</strong> has won the battle with a total experience of <strong>{winningVal}</strong> compared to <strong>{losingVal}</strong>.</p>
+                <p className="winningStatement"><strong>{winner}</strong> has won the battle with a total experience of <strong>{winningVal}</strong> compared to <strong>{losingVal}</strong>!</p>
                 <Pokedex pokemon={handTwo} exp={handTwo.totalExpTwo}/>          
             </div>
         )
