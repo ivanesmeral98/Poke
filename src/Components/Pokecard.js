@@ -8,10 +8,10 @@ class Pokecard extends Component {
         let imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${props.id}.png`
         return (
             <div className="Pokecard">
-                <h1>{props.name}</h1>
+                <h1 className="Pokecard-title">{props.name}</h1>
                 <img src={imgSrc} alt={props.name} />
-                <div>Type: {props.type} </div>
-                <div>Base experience: {props.base_experience} </div>
+                <div className="Pokecard-data">Type: {props.type} </div>
+                <div className="Pokecard-data">Base experience: {props.exp} </div>
                 <br/>
             </div>
         )
